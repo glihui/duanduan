@@ -13,7 +13,7 @@
         近期的一些美食摄影作品
     </div>
     <div class="details-img">
-        <img src="@/assets/banner1.png"/>
+        <img src="@/assets/xiangshui1.jpg"/>
     </div>
     
   </div>
@@ -25,29 +25,6 @@ import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class Details extends Vue {
    
-
-    @Provide() productionData: Array<object> = [
-        {
-            img: require('@/assets/banner1.png'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            img: require('@/assets/banner2.png'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            img: require('@/assets/banner1.png'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            img: require('@/assets/banner2.png'),
-            title: '舌尖上的美食',
-            type: '美食'
-        }
-    ]
 
 
     mounted() {

@@ -25,10 +25,13 @@ export default class Home extends Vue {
    @Provide() bannerIndex: Number = -1; 
    @Provide() bannerList: Array<object> = [
       {
-          img: require('@/assets/banner1.png'),
+          img: require('@/assets/shiliu2.jpg'),
       },
       {
-          img: require('@/assets/banner2.png'),
+          img: require('@/assets/xiangshui1.jpg'),
+      },
+      {
+          img: require('@/assets/xiangshui2.jpg'),
       }
     ];
 

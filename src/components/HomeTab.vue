@@ -36,10 +36,6 @@ export default class HomeTab extends Vue {
           path: 'Production'
       },
       {
-          title: '联系',
-          path: 'Relation'
-      },
-      {
           title: '关于',
           path: 'About'
       }
@@ -87,10 +83,12 @@ export default class HomeTab extends Vue {
             }
             .tab-item-active{
                 background-color: #99d6c2;
+                opacity: 0.5;
                 color: #fff;
             }
             .tab-item:hover{
                 background-color: #99d6c2;
+                opacity: 0.5;
                 color: #fff;
             }
         }

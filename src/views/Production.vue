@@ -38,43 +38,39 @@ import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
 export default class Production extends Vue {
    @Provide() productionList: Array<object> = [
       {
-          title: "全部"
+          title: "商业摄影"
       },
       {
-          title: "写真"
+          title: "活动摄影"
       },
       {
-          title: "儿童"
-      },
-      {
-          title: "美食"
-      },
-      {
-          title: "婚礼"
-      },
-      {
-          title: "商业"
+          title: "其它"
       }
     ];
 
     @Provide() productionData: Array<object> = [
         {
-            img: require('@/assets/banner1.png'),
+            img: require('@/assets/shiliu1.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
-            img: require('@/assets/banner2.png'),
+            img: require('@/assets/shiliu2.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
-            img: require('@/assets/banner1.png'),
+            img: require('@/assets/shiliu3.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
-            img: require('@/assets/banner2.png'),
+            img: require('@/assets/shiliu4.jpg'),
+            title: '舌尖上的美食',
+            type: '美食'
+        },
+        {
+            img: require('@/assets/shoubiao1.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         }
@@ -111,7 +107,7 @@ export default class Production extends Vue {
         display: flex;
         margin-bottom: 10px;
         .tab-item{
-            width: 58px;
+            padding: 0 20px;
             height: 36px;
             line-height: 36px;
             text-align: center;
@@ -120,8 +116,8 @@ export default class Production extends Vue {
         }
         .tab-item-active{
             color: #fff;
-            background-color: #232222;
-
+            background-color: #000;
+            opacity: 0.5;
         }
     }
     .production-list{
@@ -137,6 +133,8 @@ export default class Production extends Vue {
                 overflow: hidden;
                 cursor: pointer;
                 .production-img-box{
+                    width: 430px;
+                    // height: 300px;
                     position: relative;
                     left: 50%;
                     top: 50%;
