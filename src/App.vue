@@ -3,7 +3,7 @@
     <div id="nav">
       <HomeTab/>
     </div>
-    <div class="view-content">
+    <div class="view-content" id="viewContent">
       <router-view/>
     </div>
     <Relation></Relation>

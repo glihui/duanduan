@@ -37,6 +37,10 @@ const router = new VueRouter({
   routes
 })
 
+router.afterEach(() => {
+  let ele:any = document.getElementById('viewContent');
+  ele.scrollTo(0,0);
+})
 
 
 export default router

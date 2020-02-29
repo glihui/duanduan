@@ -7,7 +7,7 @@
         :autoplay="false"
         @change="changeBanner">
         <el-carousel-item v-for="(item, index) in bannerList" :key="index">
-          <div class="banner-img">
+          <div class="banner-img" @click="goDetails">
             <img :src="item.img" :class="{'img-scale': bannerIndex===index}"/>
           </div>
         </el-carousel-item>
@@ -17,20 +17,20 @@
       <h2 class="title">好好拍摄，天天向尚</h2>
       <div class="tit">作品会陆续更新，敬请期待</div>
       <div class="production-list-one">
-        <div class="left-box">
+        <div class="left-box" @click="goDetails">
           <img src="@/assets/shoubiao1.jpg"/>
         </div>
         <div class="right-box">
-          <div class="right-box-img">
+          <div class="right-box-img" @click="goDetails">
             <img src="@/assets/shiliu1.jpg"/>
           </div>
-          <div class="right-box-img">
+          <div class="right-box-img" @click="goDetails">
             <img src="@/assets/xiangshui1.jpg"/>
           </div>
-          <div class="right-box-img">
+          <div class="right-box-img" @click="goDetails">
             <img src="@/assets/xiangshui2.jpg"/>
           </div>
-          <div class="right-box-img">
+          <div class="right-box-img" @click="goDetails">
             <img src="@/assets/shiliu4.jpg"/>
           </div>
         </div>
@@ -66,6 +66,10 @@ export default class Home extends Vue {
     changeBanner(index: Number) {
       console.log(index);
       this.bannerIndex = index;
+    }
+
+    goDetails() {
+        this.$router.push({name: 'Details'});
     }
 }
 </script>
