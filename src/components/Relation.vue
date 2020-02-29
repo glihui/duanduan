@@ -87,7 +87,6 @@ export default class Relation extends Vue {
         width: 152px;
         height: 152px;
         margin: 0 auto;
-        background: red;
       }
       .tit{
         color: #666;

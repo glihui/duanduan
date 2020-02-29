@@ -2,7 +2,7 @@
   <div class="details">
     <div class="title">
         <div class="title-left">近期的一些美食片子</div>
-        <div class="title-right">
+        <div class="title-right" @click="goFullscreen">
             全屏
         </div>
     </div>
@@ -15,24 +15,26 @@
     <div class="details-img">
         <img src="@/assets/xiangshui1.jpg"/>
     </div>
-    
+    <full-screen-box v-if="showFullScreen" @closeFullscreen="showFullScreen = false"></full-screen-box>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
+import { fullScreen } from '@/util/common';
+import fullScreenBox from '@/components/FullScreen.vue';
 
-@Component
+@Component({
+    components: {
+        fullScreenBox
+    } 
+})
 export default class Details extends Vue {
-   
-
-
-    mounted() {
-      
-    }
-
-    
-
+   @Provide() showFullScreen:Boolean = false;
+   goFullscreen() {
+       fullScreen();
+       this.showFullScreen = true;
+   }
    
 }
 </script>

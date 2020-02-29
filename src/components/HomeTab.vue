@@ -1,7 +1,7 @@
 <template>
     <div class="tab_box">
         <div class="author" @click="jumpToPage('/')">
-            姓名
+            段段
         </div>
         <div class="author-sub">
             phpotography studio
