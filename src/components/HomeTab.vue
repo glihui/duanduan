@@ -1,10 +1,10 @@
 <template>
     <div class="tab_box">
-        <div class="author" @click="jumpToPage('/')">
-            段段
+        <div class="author" @click="jumpToPage('Home')">
+            <img src="@/assets/logo-icon.png"/>
         </div>
         <div class="author-sub">
-            phpotography studio
+           
         </div>
         <div class="tab-list">
             <div 
@@ -60,12 +60,15 @@ export default class HomeTab extends Vue {
         padding: 100px 30px 0 0;
         .author{
             font-size: 20px;
-            color: #111;
+            color: #965718;
             padding-top: 20px;
+            img {
+                width: 100px;
+            }
         }
         .author-sub{
             font-size: 10px;
-            color: #111;
+            color: #965718;
             padding-bottom: 30px;
         }
         .tab-list{
@@ -75,19 +78,19 @@ export default class HomeTab extends Vue {
                 width: 220px;
                 text-align: left;
                 line-height: 42px;
-                color: #9c9c9c;
+                color: #965718;
                 font-size: 14px;
                 padding-left: 25px;
                 box-sizing: border-box;
                 cursor: pointer;
             }
             .tab-item-active{
-                background-color: #99d6c2;
+                background-color: #000;
                 opacity: 0.5;
                 color: #fff;
             }
             .tab-item:hover{
-                background-color: #99d6c2;
+                background-color: #000;
                 opacity: 0.5;
                 color: #fff;
             }

@@ -7,7 +7,7 @@
         :autoplay="false"
         @change="changeBanner">
         <el-carousel-item v-for="(item, index) in bannerList" :key="index">
-          <div class="banner-img" @click="goDetails">
+          <div class="banner-img" @click="goDetails(item.id)">
             <img :src="item.img" :class="{'img-scale': bannerIndex===index}"/>
           </div>
         </el-carousel-item>
@@ -17,20 +17,20 @@
       <h2 class="title">好好拍摄，天天向尚</h2>
       <div class="tit">作品会陆续更新，敬请期待</div>
       <div class="production-list-one">
-        <div class="left-box" @click="goDetails">
+        <div class="left-box" @click="goDetails(8)">
           <img src="@/assets/shoubiao1.jpg"/>
         </div>
         <div class="right-box">
-          <div class="right-box-img" @click="goDetails">
+          <div class="right-box-img" @click="goDetails(1)">
             <img src="@/assets/shiliu1.jpg"/>
           </div>
-          <div class="right-box-img" @click="goDetails">
+          <div class="right-box-img" @click="goDetails(5)">
             <img src="@/assets/xiangshui1.jpg"/>
           </div>
-          <div class="right-box-img" @click="goDetails">
+          <div class="right-box-img" @click="goDetails(6)">
             <img src="@/assets/xiangshui2.jpg"/>
           </div>
-          <div class="right-box-img" @click="goDetails">
+          <div class="right-box-img" @click="goDetails(4)">
             <img src="@/assets/shiliu4.jpg"/>
           </div>
         </div>
@@ -48,12 +48,15 @@ export default class Home extends Vue {
    @Provide() bannerList: Array<object> = [
       {
           img: require('@/assets/shiliu2.jpg'),
+          id: 2
       },
       {
           img: require('@/assets/xiangshui1.jpg'),
+          id: 5
       },
       {
           img: require('@/assets/xiangshui2.jpg'),
+          id: 6
       }
     ];
 
@@ -68,8 +71,8 @@ export default class Home extends Vue {
       this.bannerIndex = index;
     }
 
-    goDetails() {
-        this.$router.push({name: 'Details'});
+    goDetails(id: any) {
+        this.$router.push({name: 'Details', query: {id: id}});
     }
 }
 </script>
@@ -100,10 +103,11 @@ export default class Home extends Vue {
         text-align: center;
         padding: 100px 0 20px 0;
         font-size: 44.8px;
+        color: #965718;
       }
       .tit{
         text-align: center;
-        color: #000;
+        color: #965718;
         padding-bottom: 100px;
         font-size: 16px;
       }

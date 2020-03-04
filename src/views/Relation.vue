@@ -15,10 +15,6 @@ import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
 export default class Relation extends Vue {
    
 
-    
-
-    
-
    
 }
 </script>

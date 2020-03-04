@@ -69,25 +69,28 @@ export default class Fullscreen extends Vue {
     @Provide() isAutoplay: Boolean = true;
     @Provide() bannerList: Array<object> = [
       {
-          img: require('@/assets/shiliu2.jpg'),
-      },
-      {
           img: require('@/assets/xiangshui1.jpg'),
       },
       {
           img: require('@/assets/xiangshui2.jpg'),
       },
       {
-          img: require('@/assets/shiliu2.jpg'),
+          img: require('@/assets/xiangshui3.jpg'),
       },
       {
-          img: require('@/assets/xiangshui1.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui2.jpg'),
+          img: require('@/assets/shiliu1.jpg'),
       },
       {
           img: require('@/assets/shiliu2.jpg'),
+      },
+      {
+          img: require('@/assets/shiliu3.jpg'),
+      },
+      {
+          img: require('@/assets/shiliu4.jpg'),
+      },
+      {
+          img: require('@/assets/shoubiao1.jpg'),
       },
       {
           img: require('@/assets/xiangshui1.jpg'),
@@ -163,11 +166,17 @@ export default class Fullscreen extends Vue {
         z-index: 1;
         background: #000;
         .fullscreen-box{
-            width: 800px;
-            height: 100%;
-            margin: 0 auto;
+            width: 900px;
+            height: 600px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            margin-left: -450px;
+            margin-top: -300px;
+            overflow: hidden;
             img{
-                width: 100%;
+                // width: 100%;
+                width: 900px;
                 position: relative;
                 left: 50%;
                 top: 50%;

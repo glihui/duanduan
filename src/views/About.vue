@@ -1,10 +1,7 @@
 <template>
   <div class="about">
     <div class="avatar">
-        <img class="avatar-img"/>
-    </div>
-    <div class="user-name">
-      段段
+        <img class="avatar-img" src="@/assets/logo-icon.png"/>
     </div>
     <div class="user-address"> 
       北京 朝阳
@@ -54,28 +51,25 @@ export default class About extends Vue {
     text-align: center;
     .avatar{
       width: 100px;
-      height: 100px;
       margin: 0 auto 20px;
-      background: red;
       .avatar-img{
         width: 100px;
-        height: 100px;
       }
     }
     .user-name{
-      color: rgb(51, 51, 51);
+      color: #965718;
       font-size: 16px;
       font-weight: bold;
     }
     .user-address{
-      color: rgb(153, 153, 153);
+      color: #965718;
       font-size: 12px;
       margin-top: 8px;
     }
     .user-des{
       width: 100%;
       font-size: 13px;
-      color: rgb(51, 51, 51);
+      color: #965718;
       white-space: pre-wrap;
       padding: 30px 20px;
       background: #fff;
@@ -83,7 +77,7 @@ export default class About extends Vue {
       margin: 80px 0 0;
     }
     .call-me{
-      background-color: #272727;
+      background-color: #000;
       padding: 10px 26px;
       color: #fff;
       font-size: 14px;
@@ -98,10 +92,9 @@ export default class About extends Vue {
         width: 152px;
         height: 152px;
         margin: 0 auto;
-        background: red;
       }
       .tit{
-        color: #666;
+        color: #965718;
         font-size: 12px;
         margin: 10px auto 0;
         line-height: 21px;

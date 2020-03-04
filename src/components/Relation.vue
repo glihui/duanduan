@@ -89,7 +89,7 @@ export default class Relation extends Vue {
         margin: 0 auto;
       }
       .tit{
-        color: #666;
+        color: #965718;
         font-size: 12px;
         margin: 10px auto 0;
         line-height: 21px;
@@ -106,6 +106,7 @@ export default class Relation extends Vue {
             height: 56px;
             line-height: 56px;
             background: #1D1D1D;
+            opacity: 0.5;
             font-size: 16px;
             color: #fff;
             padding-left: 20px;
@@ -126,7 +127,8 @@ export default class Relation extends Vue {
             height: 44px;
             line-height: 44px;
             background: #f5f5f5;
-            font-size: 12px;    
+            font-size: 12px; 
+            color: #965718;   
         }
     }
     .phone-box-active{

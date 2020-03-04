@@ -16,7 +16,7 @@
             class="production-item"
             v-for="(item, index) in productionData"
             :key="index"
-            @click="goDetails">
+            @click="goDetails(item.id)">
             <div class="production-img">
                 <img class="production-img-box" :src="item.img"/>
             </div>
@@ -50,27 +50,32 @@ export default class Production extends Vue {
 
     @Provide() productionData: Array<object> = [
         {
-            img: require('@/assets/shiliu1.jpg'),
+            id: 5,
+            img: require('@/assets/xiangshui1.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
+            id: 2,
             img: require('@/assets/shiliu2.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
-            img: require('@/assets/shiliu3.jpg'),
+            id: 6,
+            img: require('@/assets/xiangshui2.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
-            img: require('@/assets/shiliu4.jpg'),
+            id: 7,
+            img: require('@/assets/xiangshui3.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         },
         {
-            img: require('@/assets/shoubiao1.jpg'),
+            id: 2,
+            img: require('@/assets/shiliu2.jpg'),
             title: '舌尖上的美食',
             type: '美食'
         }
@@ -86,8 +91,8 @@ export default class Production extends Vue {
         this.tabIndex = index;
     }
 
-    goDetails() {
-        this.$router.push({name: 'Details'});
+    goDetails(id:any) {
+        this.$router.push({name: 'Details', query: {id: id}});
     }
 
    
@@ -99,7 +104,7 @@ export default class Production extends Vue {
     width: 100%;
     padding-top: 100px;
     .title{
-        color: #444;
+        color: #965718;
         font-size: 26px;
         padding-bottom: 30px;
     }
@@ -111,7 +116,7 @@ export default class Production extends Vue {
             height: 36px;
             line-height: 36px;
             text-align: center;
-            color: #616161;
+            color: #965718;
             cursor: pointer;
         }
         .tab-item-active{
@@ -123,18 +128,18 @@ export default class Production extends Vue {
     .production-list{
         .production-item{
             float: left;
-            margin: 0 40px 40px 0;
-            width: 430px;
-            height: 360px;
+            margin: 0 20px 20px 0;
+            width: 450px;
+            height: 300px;
             overflow: hidden;
             .production-img{
-                width: 430px;
+                width: 450px;
                 height: 300px;
                 overflow: hidden;
                 cursor: pointer;
                 .production-img-box{
-                    width: 430px;
-                    // height: 300px;
+                    width: 450px;
+                    height: 300px;
                     position: relative;
                     left: 50%;
                     top: 50%;
@@ -146,14 +151,14 @@ export default class Production extends Vue {
                 }
             }
             .production-title{
-                color: #333;
+                color: #965718;
                 font-size: 15px;
                 line-height: 40px;
             }
             .production-type{
                 height: 20px;
                 line-height: 20px;
-                color: #BABABA;
+                color: #965718;
                 font-size: 12px;
             }
         }

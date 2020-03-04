@@ -1,19 +1,19 @@
 <template>
   <div class="details">
     <div class="title">
-        <div class="title-left">近期的一些美食片子</div>
+        <div class="title-left">{{currentPro.title}}</div>
         <div class="title-right" @click="goFullscreen">
             全屏
         </div>
     </div>
     <div class="time">
-        October 16,2019
+        {{currentPro.time}}
     </div>
     <div class="des">
-        近期的一些美食摄影作品
+        {{currentPro.des}}
     </div>
     <div class="details-img">
-        <img src="@/assets/xiangshui1.jpg"/>
+        <img :src="currentPro.img"/>
     </div>
     <full-screen-box v-if="showFullScreen" @closeFullscreen="showFullScreen = false"></full-screen-box>
   </div>
@@ -23,6 +23,7 @@
 import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
 import { fullScreen } from '@/util/common';
 import fullScreenBox from '@/components/FullScreen.vue';
+import { productions } from '@/util/mock';
 
 @Component({
     components: {
@@ -31,6 +32,17 @@ import fullScreenBox from '@/components/FullScreen.vue';
 })
 export default class Details extends Vue {
    @Provide() showFullScreen:Boolean = false;
+   @Provide() currentPro:Object = {};
+
+   created() {
+       console.log(this.$route.query.id)
+       productions.map((item: any) => {
+           if(this.$route.query.id == item.id) {
+               this.currentPro = item;
+           }
+       })
+   }  
+
    goFullscreen() {
        fullScreen();
        this.showFullScreen = true;
@@ -47,11 +59,11 @@ export default class Details extends Vue {
         display: flex;
         justify-content: space-between;
         .title-left{
-            color: #111;
+            color: #965718;
             font-size: 20px;
         }
         .title-right{
-            background: #82C8AE;
+            background: #965718;
             color: white;
             height: 35px;
             border-radius: 50px;
@@ -65,17 +77,22 @@ export default class Details extends Vue {
         }
     }
     .time{
-        color: #aaa;
+        color: #965718;
         font-size: 12px;
+        padding-bottom: 10px;
     }
     .des{
-        color: #666;
+        color: #965718;
         font-size:14px;
         line-height: 60px;
     }
     .details-img{
         width: 950px;
         overflow: hidden;
+        margin-bottom: 20px;
+        img{
+            width: 950px;
+        }
     }
   }
 </style>
