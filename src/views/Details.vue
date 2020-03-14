@@ -15,7 +15,7 @@
     <div class="details-img">
         <img :src="currentPro.img"/>
     </div>
-    <full-screen-box v-if="showFullScreen" @closeFullscreen="showFullScreen = false"></full-screen-box>
+    <full-screen-box :currentId="currentPro.id" v-if="showFullScreen" @closeFullscreen="showFullScreen = false"></full-screen-box>
   </div>
 </template>
 

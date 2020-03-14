@@ -8,6 +8,7 @@
                 @change="changeNav" 
                 height="100%" 
                 direction="vertical"
+                :initial-index="currentIndex"
                 :autoplay="isAutoplay">
                 <el-carousel-item v-for="(item, index) in $store.state.fullScreenData" :key="index">
                     <img :src="item.img"/>
@@ -63,10 +64,20 @@ import { exitFullscreen } from '@/util/common';
 
 @Component
 export default class Fullscreen extends Vue {
+    @Prop() private currentId!: any;
     @Provide() showNav: Boolean = false;
     @Provide() isPlayMusic: Boolean = true;
     @Provide() currentIndex: Number = 0;
     @Provide() isAutoplay: Boolean = true;
+
+    created() {
+        for(let i=0; i<this.$store.state.fullScreenData.length; i++) {
+            if (this.$store.state.fullScreenData[i].id == this.currentId) {
+                console.log('sss',i)
+                this.currentIndex = i;
+            }
+        }
+    }
     
     isshowNav() {
         this.showNav = !this.showNav;
