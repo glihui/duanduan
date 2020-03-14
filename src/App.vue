@@ -1,12 +1,14 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <HomeTab/>
+  <div id="allApp">
+    <div id="app">
+      <div id="nav">
+        <HomeTab/>
+      </div>
+      <div class="view-content" id="viewContent">
+        <router-view/>
+      </div>
+      <Relation></Relation>
     </div>
-    <div class="view-content" id="viewContent">
-      <router-view/>
-    </div>
-    <Relation></Relation>
   </div>
 </template>
 
@@ -37,10 +39,15 @@ export default class App extends Vue {
      this.getSettings();
   }
 
+
   getSettings() {
       API.getSetting().then((res:any) => {
           if (res.code === 0) {
               this.$store.commit('setting', res.data);
+              let ele:any = document.getElementById("allApp");
+              // console.log(ele)
+              ele.style.background = `url(${res.data.bgImage})`;
+              ele.style.backgroundSize = 'cover';
           } else {
               this.$message({
                   message: res.message,
@@ -67,12 +74,15 @@ img{border:0;vertical-align:middle}
 table{border-collapse:collapse;border-spacing:0}
 p{word-wrap:break-word}
 html{
-  background: url('./assets/main.jpg');
-  background-size:cover;
+  
 }
-html, body{
+html, body, #allApp{
   width: 100%;
   height: 100%;
+}
+#allApp{
+  // background: url('./assets/main.jpg');
+  // background-size:cover;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
