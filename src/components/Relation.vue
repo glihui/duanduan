@@ -4,7 +4,7 @@
             <div class="relation-item" @click="openPhone">
                 <img src="@/assets/phone.png"/>
             </div>
-            <div class="relation-item">
+            <div class="relation-item" @click="openWeibo">
                 <img src="@/assets/weibo.png"/>
             </div>
             <div class="relation-item" @click="openCallMe">
@@ -17,7 +17,7 @@
             :visible.sync="dialogVisible"
             width="30%">
             <div class="el-dialog-box">
-                <img class="weixin-avatar" src="@/assets/wechat.jpeg"/>
+                <img class="weixin-avatar" :src="$store.state.settingData.weixinImage"/>
                 <div class="tit">
                     请打开微信<br/>
                     扫一扫 添加我为微信好友
@@ -30,7 +30,7 @@
                 <img class="close-phone" src="@/assets/close.png" @click="openPhone"/>
             </div>
             <div class="phone-content">
-                Wechat/QQ：397281816
+                {{$store.state.settingData.relationWay}}
             </div>
         </div>
     </div>
@@ -50,6 +50,9 @@ export default class Relation extends Vue {
     openPhone() {
         this.isShowPhone = !this.isShowPhone;
     } 
+    openWeibo() {
+        window.open(this.$store.state.settingData.weiboLink);
+    }
 }
 </script>
 <style lang="scss" scoped>

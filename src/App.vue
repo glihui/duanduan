@@ -11,10 +11,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Provide, Vue } from 'vue-property-decorator';
 import HomeTab from '@/components/HomeTab.vue';
 import Relation from '@/components/Relation.vue';
+import API from '@/api/api.js';
 
+interface settingObj {
+    bgImage: String,
+    logoImage: String,
+    title: String,
+    subTitle: String,
+    address: String,
+    weixinImage: String,
+    relationWay: String
+}
 
 @Component({
   components: {
@@ -22,7 +32,27 @@ import Relation from '@/components/Relation.vue';
     Relation
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  created() {
+     this.getSettings();
+  }
+
+  getSettings() {
+      API.getSetting().then((res:any) => {
+          if (res.code === 0) {
+              this.$store.commit('setting', res.data);
+          } else {
+              this.$message({
+                  message: res.message,
+                  type: 'error'
+              });
+          }    
+      }).catch((error:any) => {
+          console.log(error.message);
+          this.$message.error(error.message);
+      });
+  }
+}
 </script>
 
 

@@ -1,7 +1,7 @@
 <template>
     <div class="tab_box">
         <div class="author" @click="jumpToPage('Home')">
-            <img src="@/assets/logo-icon.png"/>
+            <img :src="$store.state.settingData.logoImage"/>
         </div>
         <div class="author-sub">
            

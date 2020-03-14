@@ -7,10 +7,10 @@
         </div>
     </div>
     <div class="time">
-        {{currentPro.time}}
+        {{currentPro.created_at}}
     </div>
     <div class="des">
-        {{currentPro.des}}
+        {{currentPro.body}}
     </div>
     <div class="details-img">
         <img :src="currentPro.img"/>
@@ -23,7 +23,8 @@
 import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
 import { fullScreen } from '@/util/common';
 import fullScreenBox from '@/components/FullScreen.vue';
-import { productions } from '@/util/mock';
+import API from '@/api/api.js';
+
 
 @Component({
     components: {
@@ -32,21 +33,52 @@ import { productions } from '@/util/mock';
 })
 export default class Details extends Vue {
    @Provide() showFullScreen:Boolean = false;
-   @Provide() currentPro:Object = {};
+   @Provide() currentPro:any = {};
 
    created() {
        console.log(this.$route.query.id)
-       productions.map((item: any) => {
-           if(this.$route.query.id == item.id) {
-               this.currentPro = item;
-           }
-       })
+       this.getDetails(this.$route.query.id);
    }  
+
+   getDetails(id:any) {
+       API.getTopicDetail(id).then((res:any) => {
+            if (res.code === 0) {
+                this.currentPro = res.data;
+            } else {
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
+            }    
+        }).catch((error:any) => {
+            console.log(error.message);
+            this.$message.error(error.message);
+        });
+   }
 
    goFullscreen() {
        fullScreen();
        this.showFullScreen = true;
+
+        this.getProList();
+
    }
+
+   getProList() {
+        API.getCategoriesTopic(this.currentPro.category_id).then((res:any) => {
+            if (res.code === 0) {
+                this.$store.commit('setFullScreenData',res.data.data)
+            } else {
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
+            }    
+        }).catch((error:any) => {
+            console.log(error.message);
+            this.$message.error(error.message);
+        });
+    }
    
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div class="about">
     <div class="avatar">
-        <img class="avatar-img" src="@/assets/logo-icon.png"/>
+        <img class="avatar-img" :src="$store.state.settingData.logoImage"/>
     </div>
     <div class="user-address"> 
-      北京 朝阳
+      {{$store.state.settingData.address}}
     </div>
     <div class="user-des">
-      好好拍摄 天天向尚
+      {{$store.state.settingData.title}}
     </div>
     <div class="call-me" @click="openCallMe">
       联系我
@@ -18,7 +18,7 @@
       :visible.sync="dialogVisible"
       width="30%">
         <div class="el-dialog-box">
-          <img class="weixin-avatar" src="@/assets/wechat.jpeg"/>
+          <img class="weixin-avatar" :src="$store.state.settingData.weixinImage"/>
           <div class="tit">
             请打开微信<br/>
             扫一扫 添加我为微信好友

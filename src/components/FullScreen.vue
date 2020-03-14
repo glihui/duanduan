@@ -9,7 +9,7 @@
                 height="100%" 
                 direction="vertical"
                 :autoplay="isAutoplay">
-                <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+                <el-carousel-item v-for="(item, index) in $store.state.fullScreenData" :key="index">
                     <img :src="item.img"/>
                 </el-carousel-item>
             </el-carousel>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="right-nav-img" id="rightNav">
                     <div class="nav-img-item" 
-                         v-for="(item, index) in bannerList" 
+                         v-for="(item, index) in $store.state.fullScreenData" 
                          :key="index"
                          @click="setActiveItem(index)">
                         <img :src="item.img" :class="{'current' : currentIndex === index}"/>
@@ -67,47 +67,6 @@ export default class Fullscreen extends Vue {
     @Provide() isPlayMusic: Boolean = true;
     @Provide() currentIndex: Number = 0;
     @Provide() isAutoplay: Boolean = true;
-    @Provide() bannerList: Array<object> = [
-      {
-          img: require('@/assets/xiangshui1.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui2.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui3.jpg'),
-      },
-      {
-          img: require('@/assets/shiliu1.jpg'),
-      },
-      {
-          img: require('@/assets/shiliu2.jpg'),
-      },
-      {
-          img: require('@/assets/shiliu3.jpg'),
-      },
-      {
-          img: require('@/assets/shiliu4.jpg'),
-      },
-      {
-          img: require('@/assets/shoubiao1.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui1.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui2.jpg'),
-      },
-      {
-          img: require('@/assets/shiliu2.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui1.jpg'),
-      },
-      {
-          img: require('@/assets/xiangshui2.jpg'),
-      }
-    ];
     
     isshowNav() {
         this.showNav = !this.showNav;

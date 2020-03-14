@@ -7,11 +7,11 @@
             :key="index"
             class="tab-item"
             :class="{'tab-item-active':tabIndex === index}"
-            @click="selectTab(index)">
+            @click="selectTab(index, item.id)">
             {{item.title}}
         </div>
     </div>
-    <div class="production-list">
+    <div class="production-list" id="productionList">
         <div 
             class="production-item"
             v-for="(item, index) in productionData"
@@ -23,9 +23,6 @@
             <div class="production-title">
                 {{item.title}}
             </div>
-            <div class="production-type">
-                {{item.type}}
-            </div>
         </div>
     </div>
   </div>
@@ -33,62 +30,67 @@
 
 <script lang="ts">
 import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
+import API from '@/api/api.js';
+
 
 @Component
 export default class Production extends Vue {
+   @Provide() selectCategoryId:Number = 2;
    @Provide() productionList: Array<object> = [
       {
-          title: "商业摄影"
+          title: "商业摄影",
+          id: 2
       },
       {
-          title: "活动摄影"
+          title: "活动摄影",
+          id: 3
       },
       {
-          title: "其它"
+          title: "其它",
+          id: 4
       }
     ];
 
-    @Provide() productionData: Array<object> = [
-        {
-            id: 5,
-            img: require('@/assets/xiangshui1.jpg'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            id: 2,
-            img: require('@/assets/shiliu2.jpg'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            id: 6,
-            img: require('@/assets/xiangshui2.jpg'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            id: 7,
-            img: require('@/assets/xiangshui3.jpg'),
-            title: '舌尖上的美食',
-            type: '美食'
-        },
-        {
-            id: 2,
-            img: require('@/assets/shiliu2.jpg'),
-            title: '舌尖上的美食',
-            type: '美食'
-        }
-    ]
+    @Provide() productionData: Array<object> = []
 
     @Provide() tabIndex:Number = 0;
 
-    mounted() {
-      
+    created() {
+        
     }
 
-    selectTab(index: Number) {
+    mounted() {
+      this.getProList();
+    }
+
+    getProList() {
+        const loading = this.$loading({
+          target: "#productionList",  
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        API.getCategoriesTopic(this.selectCategoryId).then((res:any) => {
+            loading.close();
+            if (res.code === 0) {
+                this.productionData = res.data.data;
+            } else {
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
+            }    
+        }).catch((error:any) => {
+            console.log(error.message);
+            this.$message.error(error.message);
+        });
+    }
+
+    selectTab(index: Number, id: Number) {
         this.tabIndex = index;
+        this.selectCategoryId = id;
+        this.getProList();
     }
 
     goDetails(id:any) {
@@ -130,7 +132,7 @@ export default class Production extends Vue {
             float: left;
             margin: 0 20px 20px 0;
             width: 450px;
-            height: 300px;
+            // height: 300px;
             overflow: hidden;
             .production-img{
                 width: 450px;
@@ -162,6 +164,12 @@ export default class Production extends Vue {
                 font-size: 12px;
             }
         }
+    }
+    .el-icon-loading{
+        font-size: 60px;
+    }
+    .el-loading-spinner .el-loading-text{
+        font-size: 34px;
     }
   }
 </style>

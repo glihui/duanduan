@@ -7,32 +7,21 @@
         :autoplay="false"
         @change="changeBanner">
         <el-carousel-item v-for="(item, index) in bannerList" :key="index">
-          <div class="banner-img" @click="goDetails(item.id)">
-            <img :src="item.img" :class="{'img-scale': bannerIndex===index}"/>
+          <div class="banner-img" @click="goJump(item)">
+            <img :src="item.img_url" :class="{'img-scale': bannerIndex===index}"/>
           </div>
         </el-carousel-item>
       </el-carousel>
     </div>
     <div class="production-box">
-      <h2 class="title">好好拍摄，天天向尚</h2>
-      <div class="tit">作品会陆续更新，敬请期待</div>
-      <div class="production-list-one">
-        <div class="left-box" @click="goDetails(8)">
-          <img src="@/assets/shoubiao1.jpg"/>
-        </div>
-        <div class="right-box">
-          <div class="right-box-img" @click="goDetails(1)">
-            <img src="@/assets/shiliu1.jpg"/>
-          </div>
-          <div class="right-box-img" @click="goDetails(5)">
-            <img src="@/assets/xiangshui1.jpg"/>
-          </div>
-          <div class="right-box-img" @click="goDetails(6)">
-            <img src="@/assets/xiangshui2.jpg"/>
-          </div>
-          <div class="right-box-img" @click="goDetails(4)">
-            <img src="@/assets/shiliu4.jpg"/>
-          </div>
+      <h2 class="title">{{$store.state.settingData.title}}</h2>
+      <div class="tit">{{$store.state.settingData.subTitle}}</div>
+      <div class="production-list">
+        <div class="right-box-img"
+         v-for="item in proList"
+         :key="item.id"
+         @click="goDetails(item.id)">
+          <img :src="item.img"/>
         </div>
       </div>
     </div>
@@ -41,24 +30,20 @@
 
 <script lang="ts">
 import { Component, Provide, Prop, Vue } from 'vue-property-decorator';
+import API from '@/api/api.js';
+
 
 @Component
 export default class Home extends Vue {
+  
    @Provide() bannerIndex: Number = -1; 
-   @Provide() bannerList: Array<object> = [
-      {
-          img: require('@/assets/shiliu2.jpg'),
-          id: 2
-      },
-      {
-          img: require('@/assets/xiangshui1.jpg'),
-          id: 5
-      },
-      {
-          img: require('@/assets/xiangshui2.jpg'),
-          id: 6
-      }
-    ];
+   @Provide() bannerList: Array<object> = [];
+   @Provide() proList: Array<object> = [];
+
+    created() {
+      this.getBannerList();
+      this.getHomePro();
+    }
 
     mounted() {
       setTimeout(() => {
@@ -73,6 +58,43 @@ export default class Home extends Vue {
 
     goDetails(id: any) {
         this.$router.push({name: 'Details', query: {id: id}});
+    }
+
+    goJump(item:any) {
+      window.open(item.link);
+    }
+
+    getBannerList() {
+        API.getBanners().then((res:any) => {
+            if (res.code === 0) {
+                this.bannerList = res.data.data;
+            } else {
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
+            }    
+        }).catch((error:any) => {
+            console.log(error.message);
+            this.$message.error(error.message);
+        });
+    }
+
+    getHomePro() {
+      API.getCategoriesTopic(1).then((res:any) => {
+            if (res.code === 0) {
+                this.proList = res.data.data;
+               
+            } else {
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
+            }    
+        }).catch((error:any) => {
+            console.log(error.message);
+            this.$message.error(error.message);
+        });
     }
 }
 </script>
@@ -111,17 +133,19 @@ export default class Home extends Vue {
         padding-bottom: 100px;
         font-size: 16px;
       }
-      .production-list-one{
-        display: flex;
-        justify-content: space-between;
+      .production-list{
         height: 465px;
-        .left-box{
-          width: 460px;
+        .right-box-img{
+          float: left;
+          width: 300px;
+          height: 300px;
           overflow: hidden;
+          margin-right: 25px;
+          margin-bottom: 25px;
           cursor: pointer;
           img{
-            width: 460px;
-            height: 465px;
+            width: 300px;
+            height: 300px;
             transform: scale(1);
             transition:all 1s ease-out;
           }
@@ -129,31 +153,8 @@ export default class Home extends Vue {
             transform: scale(1.5);
           }
         }
-        .right-box{
-          width: 465px;
-          height: 220px;
-          .right-box-img{
-            float: left;
-            width: 220px;
-            height: 220px;
-            overflow: hidden;
-            cursor: pointer;
-            img{
-              width: 220px;
-              height: 220px;
-              transform: scale(1);
-              transition:all 1s ease-out;
-            }
-            img:hover{
-              transform: scale(1.5);
-            }
-          }
-          .right-box-img:nth-child(odd) {
-            margin-right: 25px;
-          }
-          .right-box-img:nth-child(1),.right-box-img:nth-child(2) {
-            margin-bottom: 25px;
-          }
+        .right-box-img:nth-child(3n) {
+          margin-right: 0px;
         }
       }
     }
